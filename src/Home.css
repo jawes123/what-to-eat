@@ -32,7 +32,7 @@
   color: #000000;
 }
 
-.image1 {
+.recipe1 {
   box-sizing: border-box;
 
   position: absolute;
@@ -44,7 +44,7 @@
   object-fit: cover;
 }
 
-.image2 {
+.recipe2 {
   box-sizing: border-box;
 
   position: absolute;
@@ -56,7 +56,7 @@
   object-fit: cover;
 }
 
-.image3 {
+.recipe3 {
   box-sizing: border-box;
 
   position: absolute;
@@ -68,7 +68,7 @@
   object-fit: cover;
 }
 
-.image4 {
+.recipe4 {
   box-sizing: border-box;
 
   position: absolute;
@@ -79,7 +79,7 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
-.image5 {
+.recipe5 {
   box-sizing: border-box;
 
   position: absolute;
@@ -90,7 +90,7 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
-.image6 {
+.recipe6 {
   box-sizing: border-box;
 
   position: absolute;
@@ -101,7 +101,7 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
-.image7 {
+.recipe7 {
   box-sizing: border-box;
 
   position: absolute;
@@ -112,7 +112,7 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
-.image8 {
+.recipe8 {
   box-sizing: border-box;
 
   position: absolute;
@@ -123,7 +123,7 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
-.image9 {
+.recipe9 {
   box-sizing: border-box;
 
   position: absolute;
@@ -135,6 +135,6 @@
   object-fit: cover;
 }
 
-.image1:hover, .image2:hover, .image3:hover, .image4:hover, .image5:hover, .image6:hover, .image7:hover, .image8:hover, .image9:hover {
+.recipe1:hover, .recipe2:hover, .recipe3:hover, .recipe4:hover, .recipe5:hover, .recipe6:hover, .recipe7:hover, .recipe8:hover, .recipe9:hover {
   transform: scale(1.2);
 }
