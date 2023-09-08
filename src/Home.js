@@ -2,12 +2,7 @@ import './Home.css';
 import {useNavigate} from 'react-router-dom';
 
 function Home() {
-    // function hover(image) {
-    //   image.currentTarget.src = "/hamburg.jpeg";
-    // }
-    // function leaveHover(image) {
-    //   image.currentTarget.src = "/pokebowl.jpeg";
-    // }
+
     const navigate = useNavigate();
   
     const navigateRecipe = (event) => {
