@@ -45,9 +45,6 @@ app.post("/add_recipe", async (request, response) => {
 app.get("/recipes", async (request, response) => {
     const recipe = await Recipe.find({}).lean();
     try {
-      // const rec = recipe[0]
-      // console.log(typeof rec)
-      // console.log(rec.ingredients)
       response.send(JSON.stringify(recipe));
     } catch (error) {
       response.status(500).send(error);
