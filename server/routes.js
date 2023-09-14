@@ -32,7 +32,6 @@ app.post("/add_recipe", async (request, response) => {
         description: request.body.description,
         ingredients: request.body.ingredients,
         recipe: request.body.recipe
-
      });
   
     try {

@@ -28,4 +28,5 @@ const Recipe = mongoose.model("Recipe", RecipeSchema);
 const User = mongoose.model("User", UserSchema);
 
 module.exports = {
-  User, Recipe};
+  User, Recipe
+};

@@ -1,5 +1,5 @@
-import {useLocation} from 'react-router-dom';
 import React, { useEffect, useState } from "react";
+import CreateRecipe from './components/CreateRecipe'
 
 
 
@@ -18,13 +18,13 @@ function RecipePage() {
         {recipeJSON.description}
         {recipeJSON.ingredients}
         {recipeJSON.recipe}
+        <button>Add New Recipe</button>
+        <CreateRecipe trigger={true}>
+          <h3>Popup</h3>
+        </CreateRecipe>
       </div>
 
   );
 };
-
-  function typ(x) {
-    return typeof x
-  }
   
   export default RecipePage;
