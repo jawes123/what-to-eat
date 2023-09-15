@@ -14,6 +14,7 @@ function Home() {
 
 
     const { user, isLoading } = useAuth0();
+    console.log("delete me")
     if (isLoading) {
       return <div>Loading ...</div>;
     }
@@ -39,5 +40,5 @@ function Home() {
         </div>
         );
     };
-    
+
     export default Home;
