@@ -10,14 +10,12 @@ const Profile = () => {
   }
   console.log(user)
   return (
-    isAuthenticated && (
       <div>
         <Logout/>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
       </div>
-    )
   );
 };
 
