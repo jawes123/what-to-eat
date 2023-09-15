@@ -4,21 +4,21 @@ import Logout from './Logout'
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Home() {
-
     const navigate = useNavigate();
-  
     const navigateRecipe = (event) => {
         navigate('/recipe', {state: {"id":1,"name":"yes"}}/*later will be dynamic JSON of clicked recipe*/);
     };
     const navigateProfile = (event) => {
         navigate('/profile')
     }
-    const { user, isLoading } = useAuth0();
 
+
+    const { user, isLoading } = useAuth0();
     if (isLoading) {
       return <div>Loading ...</div>;
     }
     console.log(user)
+
 
     return (
         <div className="App"> 
@@ -39,4 +39,5 @@ function Home() {
         </div>
         );
     };
+    
     export default Home;

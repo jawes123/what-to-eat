@@ -29,8 +29,6 @@ function App() {
             </ProtectedRoute>
             } 
           />
-          {/* <Route path="/recipe" element={<RecipePage />} />
-          <Route path="/profile" element={<Profile />} /> */}
        </Routes>
     </>
   );

@@ -3,12 +3,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Logout from "./Logout"
 
 const Profile = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isLoading } = useAuth0();
 
   if (isLoading) {
     return <div>Loading ...</div>;
   }
-  console.log(user)
+  console.log(user.email)
   return (
       <div>
         <Logout/>
