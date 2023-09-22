@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import CreateRecipe from './components/CreateRecipe'
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 
 function RecipePage() {
-  const [recipeJSON, setRecipeJSON] = useState("");
+  const [recipeJSON, setRecipeJSON] = useState("");    
+  const { user, isLoading } = useAuth0();
   useEffect(() => { 
-    fetch("http://localhost:3001/recipes")
+    fetch("http://localhost:3001/recipes/"+user.email)
       .then((res) => {return res.json()})
       .then((recipeJSONObject) => {
         setRecipeJSON(recipeJSONObject[0])})
   })
-  
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
   return (
       <div>
         {recipeJSON.name}

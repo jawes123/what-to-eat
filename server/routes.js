@@ -15,11 +15,11 @@ app.post("/add_user", async (request, response) => {
       response.status(500).send(error);
     }
 });
-app.get("/users", async (request, response) => {
-    const users = await User.find({});
+app.get("/users/:email", async (request, response) => {
+    const usr = await User.find({email: request.params.email});
   
     try {
-      response.send(users);
+      response.send(usr);
     } catch (error) {
       response.status(500).send(error);
     }
@@ -27,6 +27,11 @@ app.get("/users", async (request, response) => {
 
   
 app.post("/add_recipe", async (request, response) => {
+    //if(request.body.email)
+    fetch("http://localhost:3001/users")
+    .then((res) => {return res.json()})
+    .then((recipeJSONObject) => {
+      setRecipeJSON(recipeJSONObject[0])})
     const newRecipe = new Recipe({
         name: request.body.name,
         description: request.body.description,
@@ -41,10 +46,12 @@ app.post("/add_recipe", async (request, response) => {
       response.status(500).send(error);
     }
   });
-app.get("/recipes", async (request, response) => {
-    const recipe = await Recipe.find({}).lean();
+app.get("/recipes/:email", async (request, response) => {
+    const usr = await User.find({email: request.params.email});
+    const recipes = usr[0].recipes
     try {
-      response.send(JSON.stringify(recipe));
+      console.log(recipes)
+      response.send(recipes);
     } catch (error) {
       response.status(500).send(error);
     }

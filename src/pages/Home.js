@@ -1,5 +1,6 @@
 import './Home.css';
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import {useNavigate, Navigate} from 'react-router-dom';
 import Logout from './Logout'
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -10,15 +11,19 @@ function Home() {
     };
     const navigateProfile = (event) => {
         navigate('/profile')
-    }
-
-
+    }    
+    const [userJSON, setUserJSON] = useState("");
     const { user, isLoading } = useAuth0();
-    console.log("delete me")
+    useEffect(() => { 
+      fetch("http://localhost:3001/users/"+user.email)
+        .then((res) => {return res.json()})
+        .then((userJSONObject) => {
+          setUserJSON(userJSONObject[0])})
+    }, [user])
+    console.log(userJSON)
     if (isLoading) {
       return <div>Loading ...</div>;
     }
-    console.log(user)
 
 
     return (

@@ -10,17 +10,16 @@ const RecipeSchema = new mongoose.Schema({
     required: true,
   },
   ingredients: [String],
-  recipe: [String],
+  instructions: [String],
 });
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  email: {
     type: String,
     required: true,
   },
-  age: {
-    type: Number,
-    default: 0,
+  recipes: {
+    type: [RecipeSchema]
   },
 });
 
