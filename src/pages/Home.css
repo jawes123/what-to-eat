@@ -4,6 +4,21 @@
   padding: 0;
   font-family: sans-serif;
 }
+
+.box {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-evenly;
+  top: 159px;
+  position: absolute;
+}
+.box > *{
+  width: 391px;
+  height: 195px;
+  margin: 15px;
+  border: 3px solid #000000;
+  object-fit: cover;
+}
 .hamburg {
   position: absolute;
   width: 70px;
@@ -30,109 +45,6 @@
   text-align: center;
 
   color: #000000;
-}
-
-.recipe1 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 89px;
-  top: 159px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-
-.recipe2 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 524px;
-  top: 159px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-
-.recipe3 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 964px;
-  top: 159px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-
-.recipe4 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 89px;
-  top: 397px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-.recipe5 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 524px;
-  top: 397px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-.recipe6 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 964px;
-  top: 397px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-.recipe7 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 89px;
-  top: 634px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-.recipe8 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 524px;
-  top: 634px;
-  border: 3px solid #000000;
-  object-fit: cover;
-}
-.recipe9 {
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 391px;
-  height: 195px;
-  left: 964px;
-  top: 634px;
-  border: 3px solid #000000;
-  object-fit: cover;
 }
 
 .recipe1:hover, .recipe2:hover, .recipe3:hover, .recipe4:hover, .recipe5:hover, .recipe6:hover, .recipe7:hover, .recipe8:hover, .recipe9:hover {

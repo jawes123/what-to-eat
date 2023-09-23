@@ -25,23 +25,23 @@ function Home() {
       return <div>Loading ...</div>;
     }
 
-
     return (
         <div className="App"> 
-          <button onClick={navigateProfile}>profile</button>
-          <Logout/>
-          <img src={"/hamburger-menu-icon.jpeg"} alt="hamburg" className="hamburg"/>
-          <h1 className="title">Your Recipes</h1>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe1"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe2"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe3"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe4"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe5"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe6"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe7"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe8"/>
-          <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe9"/>
-    
+            <button onClick={navigateProfile}>profile</button>
+            <Logout/>
+            <img src={"/hamburger-menu-icon.jpeg"} alt="hamburg" className="hamburg"/>
+            <h1 className="title">Your Recipes</h1>
+            <div className="box">
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe1"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe2"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe3"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe4"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe5"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe6"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe7"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe8"/>
+                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe9"/>
+            </div>
         </div>
         );
     };
