@@ -9,8 +9,18 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ingredients: [String],
-  instructions: [String],
+  ingredients: {
+    type: String,
+    required: true,
+  },
+  recipe: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: Object,
+    required: true,
+  }
 });
 
 const UserSchema = new mongoose.Schema({
