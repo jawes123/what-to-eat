@@ -1,10 +1,32 @@
 
 const express = require("express");
-const mongoose = require('mongoose');
 const {User, Recipe} = require("./models");
 const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv")
+dotenv.config()
 const multer = require('multer');
-const upload = multer()
+const {GridFsStorage} = require('multer-gridfs-storage');
+const mongouri = process.env.ATLAS_URI;
+try {
+  mongoose.connect(mongouri, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  });
+} catch (error) {
+  handleError(error);
+}
+process.on('unhandledRejection', error => {
+  console.log('unhandledRejection', error.message);
+});
+let bucket;
+mongoose.connection.on("connected", () => {
+  var db = mongoose.connections[0].db;
+  bucket = new mongoose.mongo.GridFSBucket(db, {
+    bucketName: "newBucket"
+  });
+});
+const upload = multer({bucket})
 
 app.post("/add_user", async (request, response) => {
     const newUser = new User({
@@ -31,8 +53,8 @@ app.get("/users/:email", async (request, response) => {
 
   
 app.post("/add_recipe", upload.single('image'), async (request, response) => {
-    const res = await fetch("http://localhost:3001/users/jamesyu0141@gmail.com")
-    const resJSON = res.json();
+    const res = await fetch("http://localhost:3001/users/jamesyu0141@gmail.com") //static email for now
+    const resJSON = res.json(); //promise containing the json object of the user
     resJSON.then(async function(userJSONObj) {
       let userJSON = userJSONObj[0];
       const newRecipe = new Recipe({
@@ -46,8 +68,6 @@ app.post("/add_recipe", upload.single('image'), async (request, response) => {
     const updated = await User.findOneAndUpdate({email:userJSON.email}, {$push: {recipes: newRecipe}}, {
       new:true,
      });
-
-     console.log(User.storageSize())
   
      try {
        response.send(updated);
