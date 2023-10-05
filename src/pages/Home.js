@@ -25,8 +25,11 @@ function Home() {
       return <div>Loading ...</div>;
     }
 
+    //need to get user json
+    //then map thru 'Recipes' to display each on frontend
+    //depending on the image clicked, send recipe info to /recipes
     return (
-        <div className="App"> 
+        <div className="App">
             <button onClick={navigateProfile}>profile</button>
             <Logout/>
             <img src={"/hamburger-menu-icon.jpeg"} alt="hamburg" className="hamburg"/>
