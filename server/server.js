@@ -93,7 +93,7 @@ app.post("/add_recipe", upload.single('file'), async (request, response) => {
    });
 
    try {
-     response.send(updated);
+     response.redirect("http://localhost:3000/recipe");
    } catch (error) {
      response.status(500).send(error);
    }
