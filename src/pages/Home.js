@@ -20,7 +20,10 @@ function Home() {
         .then((userJSONObject) => {
           setUserJSON(userJSONObject[0])})
     }, [user])
-    console.log(userJSON)
+    // if(userJSON===undefined){
+    //     throw new Error("user is not defined")
+    // }
+    console.log(user)
     if (isLoading) {
       return <div>Loading ...</div>;
     }

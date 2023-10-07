@@ -52,11 +52,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-app.post("/add_user", async (request, response) => {
+app.post("/add_user/:email", async (request, response) => {
+  console.log("HI")
   const newUser = new User({
-      name: request.body.name,
-      age: request.body.age
-   });
+      email: request.params.email,
+      recipes: [],
+  });
 
   try {
     await newUser.save();
@@ -66,7 +67,16 @@ app.post("/add_user", async (request, response) => {
   }
 });
 app.get("/users/:email", async (request, response) => {
-  const usr = await User.find({email: request.params.email});
+  let usr = await User.find({email: request.params.email});
+  if(usr.length==0){
+
+    console.log(request.params.email)
+    await fetch("http://localhost:3001/add_user/"+request.params.email)
+      .then((res) => {return User.find({email: request.params.email})})
+      .then((user) => {console.log(user)})
+      
+    
+  }
 
   try {
     response.send(usr);
@@ -76,8 +86,9 @@ app.get("/users/:email", async (request, response) => {
 });
 
 
-app.post("/add_recipe", upload.single('file'), async (request, response) => {
-  const res = await fetch("http://localhost:3001/users/jamesyu0141@gmail.com") //static email for now
+app.post("/add_recipe/:email", upload.single('file'), async (request, response) => {
+  console.log(request.body.email)
+  const res = await fetch("http://localhost:3001/users/"+request.params.email) //static email for now
   const resJSON = res.json(); //promise containing the json object of the user
   resJSON.then(async function(userJSONObj) {
     let userJSON = userJSONObj[0];
@@ -102,6 +113,10 @@ app.post("/add_recipe", upload.single('file'), async (request, response) => {
 });
 app.get("/recipes/:email", async (request, response) => {
   const usr = await User.find({email: request.params.email});
+  if(usr.length==0){
+    response.send({});
+    return;
+  }
   const recipes = usr[0].recipes
   try {
     response.send(recipes);

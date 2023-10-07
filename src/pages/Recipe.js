@@ -6,13 +6,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 function RecipePage() {
   const [recipeJSON, setRecipeJSON] = useState("");    
   const [showPopup, setShowPopup] = useState(false)
-  console.log(showPopup)
   const { user, isLoading } = useAuth0();
   useEffect(() => { 
     fetch("http://localhost:3001/recipes/"+user.email)
       .then((res) => {return res.json()})
       .then((recipeJSONObject) => {
-        setRecipeJSON(recipeJSONObject[0])})
+        setRecipeJSON(recipeJSONObject[0])})  //later change to dynamically get indexes of 'recipeJSONObject' based on img clicked
   },[user])
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -20,12 +19,14 @@ function RecipePage() {
 
   return (
       <div>
-        { recipeJSON !== undefined ?
+        { recipeJSON !== undefined && Object.keys(recipeJSON).length!==0 ?
           <p>
-            {recipeJSON.name}
+            <h1>{recipeJSON.name}</h1>
             {recipeJSON.description}
             {recipeJSON.ingredients}
             {recipeJSON.recipe}
+            {console.log("hello")}
+            <img className='recipeImage' src={'/uploads/'+recipeJSON.image.filename}></img>
           </p>
           :
           <h1>
@@ -38,7 +39,7 @@ function RecipePage() {
         <CreateRecipe onClickOutside={() => setShowPopup(false)}>
           <button className="close-btn" onClick={() => setShowPopup(false)}>close</button>
           <h3>Enter Recipe Details</h3>
-          <form name="myForm" action="http://localhost:3001/add_recipe" method="POST" enctype="multipart/form-data">
+          <form name="myForm" action={"http://localhost:3001/add_recipe/"+user.email} method="POST" enctype="multipart/form-data">
             Name: <input type="text" name="name"/><br/>
             Description: <textarea name="description" class="textarea resize-ta"/><br/>
             Ingredients: <textarea name="ingredients" class="textarea resize-ta"/><br/>
