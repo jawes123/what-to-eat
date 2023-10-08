@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import {useNavigate, Navigate} from 'react-router-dom';
 import Logout from './Logout'
 import { useAuth0 } from "@auth0/auth0-react";
+import CreateRecipe from './components/CreateRecipe'
 
 function Home() {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Home() {
         navigate('/profile')
     }    
     const [userJSON, setUserJSON] = useState("");
+    const [showPopup, setShowPopup] = useState(false)
     const { user, isLoading } = useAuth0();
     useEffect(() => { 
       fetch("http://localhost:3001/users/"+user.email)
@@ -23,7 +25,7 @@ function Home() {
     // if(userJSON===undefined){
     //     throw new Error("user is not defined")
     // }
-    console.log(user)
+    console.log(userJSON)
     if (isLoading) {
       return <div>Loading ...</div>;
     }
@@ -37,6 +39,8 @@ function Home() {
             <Logout/>
             <img src={"/hamburger-menu-icon.jpeg"} alt="hamburg" className="hamburg"/>
             <h1 className="title">Your Recipes</h1>
+
+            { userJSON !== undefined && userJSON.recipes !== undefined && Object.keys(userJSON.recipes).length!==0 ?
             <div className="box">
                 <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe1"/>
                 <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe2"/>
@@ -48,6 +52,29 @@ function Home() {
                 <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe8"/>
                 <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe9"/>
             </div>
+            :
+            <h1 className="noRecipeWarning"> You have no recipes. Please add a recipe by clicking 'Add New Recipe' button. </h1>
+            }
+            
+
+            <button className="addRecipeBtn" onClick={() => setShowPopup(true)}>Add New Recipe</button>
+            { showPopup ?
+            <CreateRecipe>
+            <button className="close-btn" onClick={() => setShowPopup(false)}>close</button>
+            <h3>Enter Recipe Details</h3>
+            <form name="myForm" action={"http://localhost:3001/add_recipe/"+user.email} method="POST" enctype="multipart/form-data">
+                Name: <input type="text" name="name"/><br/>
+                Description: <textarea name="description" class="textarea resize-ta"/><br/>
+                Ingredients: <textarea name="ingredients" class="textarea resize-ta"/><br/>
+                Recipe: <textarea name="recipe" class="textarea resize-ta"/><br/>
+                Image: <input type="file" name="file"/><br/>
+                <button type="submit">Submit</button>
+            </form>
+            </CreateRecipe>
+            :
+            null
+            }
+
         </div>
         );
     };

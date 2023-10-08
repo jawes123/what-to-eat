@@ -30,7 +30,7 @@
   position: absolute;
   width: 376px;
   height: 94px;
-  left: 532px;
+  left: 580px;
   top: 50px;
 
   font-family: '?????';
@@ -45,6 +45,34 @@
   text-align: center;
 
   color: #000000;
+}
+
+.noRecipeWarning {
+  font-size: 26px;
+  position: absolute;
+  left: 200px;
+  top: 160px;
+}
+
+.addRecipeBtn {
+  position: absolute;
+  top: 85px;
+  right: 200px;
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+  background-color:#339b52;
+  color: #fff;
+  border:none;
+  border-radius:10px;
+}
+.addRecipeBtn:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+.addRecipeBtn:active {
+  box-shadow: 2px 2px #666;
+  transform: translateY(2px) translateX(2px);
 }
 
 .recipe1:hover, .recipe2:hover, .recipe3:hover, .recipe4:hover, .recipe5:hover, .recipe6:hover, .recipe7:hover, .recipe8:hover, .recipe9:hover {
