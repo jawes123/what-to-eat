@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import './Recipe.css';
 
 
-function RecipePage() {
-  const [recipeJSON, setRecipeJSON] = useState("");    
-  
-  const { user, isLoading } = useAuth0();
-  useEffect(() => { 
-    fetch("http://localhost:3001/recipes/"+user.email)
-      .then((res) => {return res.json()})
-      .then((recipeJSONObject) => {
-        setRecipeJSON(recipeJSONObject[0])})  //later change to dynamically get indexes of 'recipeJSONObject' based on img clicked
-  },[user])
+function RecipePage() {  
+  const location = useLocation();
+  const { isLoading } = useAuth0();
+  const recipeJSON = location.state;
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
   return (
       <div>
-        { recipeJSON !== undefined && Object.keys(recipeJSON).length!==0 ?
-          <p>
+        <a href='/home'>
+          <img src="back.svg" className="back"/>
+        </a>
+        { recipeJSON !== null ?
+          <div>
             <h1>{recipeJSON.name}</h1>
             {recipeJSON.description}
+            {console.log(recipeJSON.ingredients)}
             {recipeJSON.ingredients}
             {recipeJSON.recipe}
-            {console.log("hello")}
             <img className='recipeImage' src={'/uploads/'+recipeJSON.image.filename}></img>
-          </p>
+          </div>
           :
-          <h1>
-            You have no recipes. Please add a recipe by clicking 'Add Recipe'.
+          <h1 class>
+            You aren't supposed to be here! Go back and click on a recipe &#62;:&#40;
           </h1>
         }
 

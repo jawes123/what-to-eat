@@ -1,14 +1,15 @@
 import './Home.css';
 import React, { useEffect, useState } from "react";
-import {useNavigate, Navigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Logout from './Logout'
 import { useAuth0 } from "@auth0/auth0-react";
 import CreateRecipe from './components/CreateRecipe'
 
 function Home() {
     const navigate = useNavigate();
-    const navigateRecipe = (event) => {
-        navigate('/recipe', {state: {"id":1,"name":"yes"}}/*later will be dynamic JSON of clicked recipe*/);
+    const navigateRecipe = (object) => {
+        console.log(object)
+        navigate('/recipe', {state: object}/*later will be dynamic JSON of clicked recipe*/);
     };
     const navigateProfile = (event) => {
         navigate('/profile')
@@ -22,9 +23,6 @@ function Home() {
         .then((userJSONObject) => {
           setUserJSON(userJSONObject[0])})
     }, [user])
-    // if(userJSON===undefined){
-    //     throw new Error("user is not defined")
-    // }
     console.log(userJSON)
     if (isLoading) {
       return <div>Loading ...</div>;
@@ -42,15 +40,11 @@ function Home() {
 
             { userJSON !== undefined && userJSON.recipes !== undefined && Object.keys(userJSON.recipes).length!==0 ?
             <div className="box">
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe1"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe2"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe3"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe4"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe5"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe6"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe7"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe8"/>
-                <img src={"/pokebowl.jpeg"} onClick={navigateRecipe} className="recipe9"/>
+                {
+                userJSON.recipes.map(
+                    (object) => (<img src={"/uploads/"+object.image.filename} onClick={()=>navigateRecipe(object)} />)
+                    )
+                }
             </div>
             :
             <h1 className="noRecipeWarning"> You have no recipes. Please add a recipe by clicking 'Add New Recipe' button. </h1>

@@ -1,0 +1,10 @@
+.recipeImage {
+    height: 250px;
+    width: 350px;
+    object-fit:contain;
+}
+
+.back {
+    height: 30px;
+    width: 30px;
+}

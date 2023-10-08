@@ -63,7 +63,7 @@
   font-size: 18px;
   background-color:#339b52;
   color: #fff;
-  border:none;
+  border: 2px solid #036210;
   border-radius:10px;
 }
 .addRecipeBtn:hover {
@@ -75,6 +75,6 @@
   transform: translateY(2px) translateX(2px);
 }
 
-.recipe1:hover, .recipe2:hover, .recipe3:hover, .recipe4:hover, .recipe5:hover, .recipe6:hover, .recipe7:hover, .recipe8:hover, .recipe9:hover {
+.box > *:hover {
   transform: scale(1.2);
 }
