@@ -4,10 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import Logout from './Logout'
 import { useAuth0 } from "@auth0/auth0-react";
 import CreateRecipe from './components/CreateRecipe';
-import { useForm } from "react-hook-form";
 
 function Home() {
-    const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate();
     const navigateRecipe = (object) => {
         console.log(object)
