@@ -9,18 +9,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
 
 .popup-inner {
     position:relative;
-    padding: 32px;
+    padding: 20px;
     width: 100%;
     max-width: 640px;
+    max-height: 100vh;
     background-color: #FFF;
+    overflow: auto;
+    outline-style: solid;
+    border-radius: 1.5%;
 }
 
-.popup-inner .close-btn {
+.close-btn {
     position: absolute;
     top: 16px;
     right: 16px;
+}
+
+.close-btn {
+    background-color: #FFF;
+    border: 0px;
+    font-size: 16px;
+}
+.close-btn:hover {
+    cursor:pointer
 }

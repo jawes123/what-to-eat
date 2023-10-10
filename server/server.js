@@ -88,6 +88,7 @@ app.get("/users/:email", async (request, response) => {
 
 
 app.post("/add_recipe/:email", upload.single('file'), async (request, response) => {
+  console.log("JIDSJFIO")
   const res = await fetch("http://localhost:3001/users/"+request.params.email) 
   const resJSON = res.json(); //promise containing the json object of the user
   resJSON.then(async function(userJSONObj) {
