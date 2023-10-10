@@ -19,11 +19,20 @@ function RecipePage() {
         </a>
         { recipeJSON !== null ?
           <div>
-            <h1>{recipeJSON.name}</h1>
-            {recipeJSON.description}
-            {console.log(recipeJSON.ingredients)}
-            {recipeJSON.ingredients}
-            {recipeJSON.recipe}
+            <h1 className="name">{recipeJSON.name}</h1>
+
+            <div className="desc">
+              Description: {recipeJSON.description}
+            </div>
+
+            <div className="ingredients">
+              {recipeJSON.ingredients}
+            </div>
+
+            <div className="recipe">
+              {recipeJSON.recipe}
+            </div>
+
             <img className='recipeImage' src={'/uploads/'+recipeJSON.image.filename}></img>
           </div>
           :

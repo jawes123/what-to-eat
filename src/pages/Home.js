@@ -110,6 +110,7 @@ function Home() {
                                 type="file" 
                                 name="file"
                                 id="file"
+                                accept="image/*"
                                 onChange={handleChange}
                                 /><br/>
                     

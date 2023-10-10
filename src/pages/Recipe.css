@@ -1,10 +1,61 @@
 .recipeImage {
-    height: 250px;
-    width: 350px;
+    position: relative;
+    max-width: 40%;
+    max-height: 450px;
     object-fit:contain;
+    left: 55%;
+    top: -400px;
+    border: 2.5px solid #000000;
 }
 
 .back {
     height: 30px;
     width: 30px;
+    margin: 30px;
+    border-radius: 50%;
+}
+.back:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+.name {
+    position: relative;
+    text-align: center;
+    top: -50px;
+}
+
+.desc, .ingredients, .recipe {
+    overflow:auto;
+    white-space: pre;
+}
+.desc {
+    position: relative;
+    text-align: center;
+    top: -30px;
+    font-size: 17px;
+}
+.ingredients {
+    position: relative;
+    resize:both;
+    border-color: black;
+    border: 2px;
+    border-style: solid;
+    width:40%;
+    height: 200px;
+    align-items: left;
+    margin-left: 5%;
+    padding: 30px;
+}
+.recipe {
+    position: relative;
+    resize:both;
+    border-color: black;
+    border: 2px;
+    border-style: solid;
+    width:40%;
+    top: 50px;
+    height: 200px;
+    align-items: left;
+    margin-left: 5%;
+    padding: 30px;
 }
