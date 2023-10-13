@@ -69,6 +69,7 @@
 .addRecipeBtn:hover {
   background-color: #4CAF50; /* Green */
   color: white;
+  cursor: pointer;
 }
 .addRecipeBtn:active {
   box-shadow: 2px 2px #666;

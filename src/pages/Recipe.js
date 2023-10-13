@@ -11,6 +11,21 @@ function RecipePage() {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
+  //recipeJSON = {...,"1 cup this\n1 TBS that",...}
+
+  const addBulletPoints = (str) => {
+    let arr = str.split('\n');
+    console.log(arr);
+    // let leftIndex = 0;
+    // for(let i = 0; i < str.length; i++){
+    //   if((str.charAt(i)==='\\' && str.charAt(i+1)==='n')){
+    //     i=i+2;
+    //     arr.push("&#x2022; "+str.substring(leftIndex,i));
+    //     leftIndex = i;
+    //   }
+    // }
+    return arr;
+  }//\r\n
 
   return (
       <div>
@@ -22,15 +37,15 @@ function RecipePage() {
             <h1 className="name">{recipeJSON.name}</h1>
 
             <div className="desc">
-              Description: {recipeJSON.description}
+            <strong>Description:</strong> {recipeJSON.description}
             </div>
 
             <div className="ingredients">
-              {recipeJSON.ingredients}
+              <strong>Ingredients: <br/><br/></strong>{recipeJSON.ingredients.split('\r\n').map(str => `\u2022 ${str}\n`)}
             </div>
 
             <div className="recipe">
-              {recipeJSON.recipe}
+              <strong>Recipe Instructions: <br/><br/></strong>{recipeJSON.recipe.split('\r\n').map((str,index) => `${index+1}. ${str}\n`)}
             </div>
 
             <img className='recipeImage' src={'/uploads/'+recipeJSON.image.filename}></img>
