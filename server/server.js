@@ -7,6 +7,7 @@ dotenv.config()
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const methodOverride = require('method-override');
+const fs = require('fs')
 
 const app = express();
 
@@ -52,6 +53,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
+
+
+/* Routes */
+// Add new user
 app.post("/add_user/:email", async (request, response) => {
   const newUser = new User({
       email: request.params.email,
@@ -66,6 +71,7 @@ app.post("/add_user/:email", async (request, response) => {
   }
 });
 
+// Get current user
 app.get("/users/:email", async (request, response) => {
   let usr = await User.find({email: request.params.email});
   if(usr.length==0){
@@ -78,7 +84,6 @@ app.get("/users/:email", async (request, response) => {
     })
       
   }
-
   try {
     response.send(usr);
   } catch (error) {
@@ -86,10 +91,10 @@ app.get("/users/:email", async (request, response) => {
   }
 });
 
-
+// Add recipe to user object
 app.post("/add_recipe/:email", upload.single('file'), async (request, response) => {
   const res = await fetch("http://localhost:3001/users/"+request.params.email) 
-  const resJSON = res.json(); //promise containing the json object of the user
+  const resJSON = res.json(); 
   resJSON.then(async function(userJSONObj) {
     let userJSON = userJSONObj[0];
     const newRecipe = new Recipe({
@@ -99,9 +104,9 @@ app.post("/add_recipe/:email", upload.single('file'), async (request, response) 
       recipe: request.body.recipe,
       image: request.file
    });
-  const updated = await User.findOneAndUpdate({email:userJSON.email}, {$push: {recipes: newRecipe}}, {
-    new:true,
-   });
+  const updated = await User.findOneAndUpdate({email:userJSON.email}, {$push: {recipes: newRecipe}}, 
+    { new:true }
+    );
 
    try {
      response.redirect("http://localhost:3000/home");
@@ -111,7 +116,7 @@ app.post("/add_recipe/:email", upload.single('file'), async (request, response) 
  })
 });
 
-
+// Get all recipes for current user
 app.get("/recipes/:email", async (request, response) => {
   const usr = await User.find({email: request.params.email});
   if(usr.length==0){
@@ -126,6 +131,30 @@ app.get("/recipes/:email", async (request, response) => {
   }
 });
 
+// Delete one recipe from current user object
+app.delete("/del_recipe/:email/:recipeID", async (request, response) => {
+  const res = await fetch("http://localhost:3001/users/"+request.params.email)
+  const resJSON = res.json(); 
+  resJSON.then(async function(userJSONObj) { 
+
+    // del from db
+    const del = await User.findOneAndUpdate(
+      { _id: userJSONObj[0]._id},
+      { $pull: { recipes: { _id: request.params.recipeID} } },
+      { new: true }
+    )
+    
+    // del image from local
+    let photoJSON = userJSONObj[0].recipes.filter((x) => {return x._id===request.params.recipeID}).pop()
+    fs.unlink(photoJSON.image.path,(err) => console.error(err))
+    
+    try {
+      response.send(del);
+    } catch (error) {
+      response.status(500).send(error);
+    }
+ })
+})
 
 
 app.listen(3001, () => {
