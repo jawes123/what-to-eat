@@ -38,9 +38,11 @@ function Home() {
         }
     }
 
-    //need to get user json
-    //then map thru 'Recipes' to display each on frontend
-    //depending on the image clicked, send recipe info to /recipes
+    //handle submit
+    const handleSubmit = (event) => {
+        document.getElementById('submit').disabled=true;
+    }
+
     return (
         <div className="App">
             <button onClick={navigateProfile}>profile</button>
@@ -73,7 +75,8 @@ function Home() {
                     name="myForm" 
                     action={"http://localhost:3001/add_recipe/"+user.email} 
                     method="POST" 
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data"
+                    onSubmit={handleSubmit}>
                    
                     Name: <input 
                             className="nameInput" 

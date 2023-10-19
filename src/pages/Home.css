@@ -8,7 +8,9 @@
 .box {
   display:flex;
   flex-wrap:wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-right: 50px;
+  margin-left: 65px;
   top: 159px;
   position: absolute;
 }
@@ -19,6 +21,11 @@
   border: 3px solid #000000;
   object-fit: cover;
 }
+.box > *:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 .hamburg {
   position: absolute;
   width: 70px;
@@ -98,6 +105,5 @@ textarea {
   font-weight:550;
 }
 
-.box > *:hover {
-  transform: scale(1.2);
-}
+
+/* labels when hovering over each image */

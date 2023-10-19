@@ -1,37 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import {useNavigate} from 'react-router-dom';
 import './Recipe.css';
 
 
 function RecipePage() {  
+  const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const recipeJSON = location.state;
+
+
+  const handleDelete = async () => {
+    console.log(recipeJSON)
+    await fetch(`http://localhost:3001/del_recipe/${user.email}/${recipeJSON._id}`, {
+      method: 'DELETE',
+    })
+    .then(res => navigate('/home'))
+  }
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }
-  //recipeJSON = {...,"1 cup this\n1 TBS that",...}
-
-  const addBulletPoints = (str) => {
-    let arr = str.split('\n');
-    console.log(arr);
-    // let leftIndex = 0;
-    // for(let i = 0; i < str.length; i++){
-    //   if((str.charAt(i)==='\\' && str.charAt(i+1)==='n')){
-    //     i=i+2;
-    //     arr.push("&#x2022; "+str.substring(leftIndex,i));
-    //     leftIndex = i;
-    //   }
-    // }
-    return arr;
-  }//\r\n
 
   return (
       <div>
         <a href='/home'>
           <img src="back.svg" className="back"/>
         </a>
+        <button className="delete-btn" onClick={handleDelete}>Delete Recipe</button>
         { recipeJSON !== null ?
           <div>
             <h1 className="name">{recipeJSON.name}</h1>
