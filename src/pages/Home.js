@@ -22,6 +22,7 @@ function Home() {
         .then((res) => {return res.json()})
         .then((userJSONObject) => {
           setUserJSON(userJSONObject[0])})
+        .catch((err) => {console.log(err)})
     }, [user])
     console.log(userJSON)
     if (isLoading) {
